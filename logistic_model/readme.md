@@ -1,0 +1,1 @@
+linear输出结果，交叉熵损失函数(pytorch自动包含了sigmoid函数)不算CNN，CNN包含了各种卷积操作并不是简单的logistics回归

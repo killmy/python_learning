@@ -26,6 +26,7 @@ class Train_data(Dataset):
 def read_data()->Tuple[Any,Any]:
     data = Train_data(x_train=x_train,y_train=y_train)
     return data
+
 # data = Train_data(x_train,y_train)
 # x_train,y_train=data[0]
 # print(x_train,y_train)

@@ -160,7 +160,7 @@ for images, labels in train_loader:
 
 #=============================#
 # Input pipeline for custom dataset                  #
-#=============================#
+#=========================++====#
 # You should build your custom dataset as below.
 class CustomDataset(Dataset):
     def __init__(self,csv_file) -> None:
