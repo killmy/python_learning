@@ -35,9 +35,9 @@ test_data = torchvision.datasets.MNIST(root="./feedforward/data",
                                                                  train=False,
                                                                  transform=tranforms.ToTensor(),
                                                                  download=True)
-print(train_data,test_data)
-
-#shufft and transform 
+# image,label = train_data[0]
+# print(image.size())
+shufft and transform 
 train_loader = DataLoader(dataset=train_data,
                                             batch_size=params.batch_size,
                                             shuffle=True)
