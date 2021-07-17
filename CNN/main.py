@@ -7,6 +7,7 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
 import Moedl
+import tensorboard
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
