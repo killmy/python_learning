@@ -3,11 +3,12 @@ coding:utf-8
 网站:https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/convolutional_neural_network/main.py#L35-L56
 https://zhuanlan.zhihu.com/p/220403674
 '''
+from re import X
 import torch
 import torch.nn as nn
 import hiddenlayer as h
 from torch.nn.modules.batchnorm import BatchNorm2d
-
+from torchviz import make_dot
 # 在cnn中一张图片看成一个数据
 class MNIST_CNNModel(nn.Module):
     def __init__(self,num_classes=10):
@@ -34,4 +35,17 @@ class MNIST_CNNModel(nn.Module):
         return out
 
 model = MNIST_CNNModel(10)
-vis_grap = h.build_graph(model,torch.randn(1,28,28))
+image = torch.randn(1,1,28,28,requires_grad=True)
+y = model(image)
+print(image.size())
+# MyConvNetVis = make_dot(y, params=dict(list(model.named_parameters()) + [('x', image)]))
+# MyConvNetVis.format = "png"
+# MyConvNetVis.directory = "E:/python_learning/CNN"
+# MyConvNetVis.view()
+
+#因为graphviz配置失败
+# 这里包含了batch_size这一个维度
+vis_grap = h.build_graph(model,image)
+vis_grap.theme = h.graph.THEMES['blue'].copy()
+vis_grap.save("E:/python_learning/CNN/Moedl.png")
+

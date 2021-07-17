@@ -1,0 +1,31 @@
+digraph {
+	graph [bgcolor="#FFFFFF" color="#7C96BC" fontcolor="#202020" fontname=Verdana fontsize=10 margin="0,0" pad="1.0,0.5" rankdir=LR]
+	node [color="#7C96BC" fillcolor="#BCD6FC" fontcolor="#202020" fontname=Verdana fontsize=10 margin="0,0" shape=box style=filled]
+	edge [color="#7C96BC" fontcolor="#202020" fontname=Verdana fontsize=10 style=solid]
+	"/outputs/20" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>MaxPool2x2</td></tr></table>>]
+	"/outputs/24" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>MaxPool2x2</td></tr></table>>]
+	"/outputs/25" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Shape</td></tr></table>>]
+	"/outputs/26" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Constant</td></tr></table>>]
+	"/outputs/27" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Gather</td></tr></table>>]
+	"/outputs/28" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Constant</td></tr></table>>]
+	"/outputs/29" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Unsqueeze</td></tr></table>>]
+	"/outputs/30" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Unsqueeze</td></tr></table>>]
+	"/outputs/31" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Concat</td></tr></table>>]
+	"/outputs/32" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Reshape</td></tr></table>>]
+	"/outputs/33" [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Linear</td></tr></table>>]
+	4111707453653100701 [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Conv5x5 &gt; BatchNorm &gt; Relu</td></tr></table>>]
+	1131510665003384409 [label=<<table border='0' cellborder='0' cellpadding='0'><tr><td cellpadding='6'>Conv5x5 &gt; BatchNorm &gt; Relu</td></tr></table>>]
+	"/outputs/24" -> "/outputs/25"
+	"/outputs/24" -> "/outputs/32"
+	"/outputs/25" -> "/outputs/27"
+	"/outputs/26" -> "/outputs/27"
+	"/outputs/27" -> "/outputs/29"
+	"/outputs/28" -> "/outputs/30"
+	"/outputs/29" -> "/outputs/31"
+	"/outputs/30" -> "/outputs/31"
+	"/outputs/31" -> "/outputs/32"
+	"/outputs/32" -> "/outputs/33"
+	4111707453653100701 -> "/outputs/20"
+	"/outputs/20" -> 1131510665003384409
+	1131510665003384409 -> "/outputs/24"
+}
