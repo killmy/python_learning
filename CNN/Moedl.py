@@ -34,18 +34,17 @@ class MNIST_CNNModel(nn.Module):
         out = self.fc(out)
         return out
 
-model = MNIST_CNNModel(10)
-image = torch.randn(1,1,28,28,requires_grad=True)
-y = model(image)
-print(image.size())
-# MyConvNetVis = make_dot(y, params=dict(list(model.named_parameters()) + [('x', image)]))
-# MyConvNetVis.format = "png"
-# MyConvNetVis.directory = "E:/python_learning/CNN"
-# MyConvNetVis.view()
+# model = MNIST_CNNModel(10)
+# image = torch.randn(1,1,28,28,requires_grad=True)
+# y = model(image)
+# print(image.size())
+# # MyConvNetVis = make_dot(y, params=dict(list(model.named_parameters()) + [('x', image)]))
+# # MyConvNetVis.format = "png"
+# # MyConvNetVis.directory = "E:/python_learning/CNN"
+# # MyConvNetVis.view()
 
-#因为graphviz配置失败
-# 这里包含了batch_size这一个维度
-vis_grap = h.build_graph(model,image)
-vis_grap.theme = h.graph.THEMES['blue'].copy()
-vis_grap.save("E:/python_learning/CNN/Moedl.png")
+# # 这里包含了batch_size这一个维度
+# vis_grap = h.build_graph(model,image)
+# vis_grap.theme = h.graph.THEMES['blue'].copy()
+# vis_grap.save("E:/python_learning/CNN/Moedl.png")
 
