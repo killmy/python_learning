@@ -1,13 +1,16 @@
 from numpy.core.defchararray import mod, title
 import torch
-from torch.autograd.grad_mode import no_grad 
+from torch.autograd.grad_mode import no_grad
+from torch.functional import Tensor 
 import torch.nn as nn
 import torchvision
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
 import Moedl
-import tensorboard
+from tensorboardX import SummaryWriter
+
+logger = SummaryWriter(log_dir="./CNN/log")
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -80,10 +83,22 @@ for epoch in range(params.num_epochs):
         optimizer.step()
         
         #show
+        global_iter_num  = epoch*total_step+i+1
         if (i+1)%params.batch_size==0:
             print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' 
             .format(epoch+1, params.num_epochs, i+1, total_step, loss.item()))
-
+            logger.add_scalar("train loss", loss.item() ,global_step=global_iter_num)#https://blog.csdn.net/u012343179/article/details/83007296
+            #拼接mini-batch
+            img = torchvision.utils.make_grid(images,nrow=12) 
+            print(img.size())
+            logger.add_image("train image sample", img, global_step=global_iter_num)
+            # writer.add_image("train_image_sample",img,global_step=global_iter_num)
+            model = model.cpu()
+            for name ,param in model.named_parameters():
+                #https://blog.csdn.net/moshiyaofei/article/details/90519430
+                #要先转化为cpu才能转化为numpy
+                logger.add_histogram("param", param.data.numpy(), global_step=global_iter_num)
+            model = model.cuda()
 #test 
 #固定batch normalization and dropout
 model.eval() # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
