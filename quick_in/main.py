@@ -191,7 +191,8 @@ for param in resnet.parameters():
 # Replace the top layer for finetuning.替换顶层进行微调
 print(resnet.fc.in_features,resnet.fc.out_features)
 resnet.fc = nn.Linear(resnet.fc.in_features,100)
-
+resnet.fc.weight.requires_grad = True
+resnet.fc.bias.requires_grad = True
 #Forward pass
 images = torch.randn(64, 3, 224, 224)
 outputs = resnet(images)
