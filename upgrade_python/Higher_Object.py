@@ -138,3 +138,31 @@ class Parrot(Bird):
 
 class Ostrich(Bird):
     pass
+
+class Runnable(object):
+    def run(self):
+        print('Running...')
+
+class Flyable(object):
+    def fly(self):
+        print('Flying...')
+
+# Multiple inheritance
+class Dog(Mammal,Runnable):
+    pass
+
+class Bat(Mammal, Flyable):
+    pass
+#通过多重继承，一个子类就可以同时获得多个父类的所有功能。
+
+#MixIn
+# 让Ostrich除了继承自Bird外，再同时继承Runnable。
+# 这种设计通常称之为MixIn
+import socketserver
+#多进程TCP服务器
+class MyTCPServer(socketserver.TCPServer, socketserver.ForkingMixIn):
+    pass
+#UDP 多线程
+class MyUDPserver(socketserver.UDPServer,socketserver.ThreadingMixIn):
+    pass
+
