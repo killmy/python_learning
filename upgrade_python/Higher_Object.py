@@ -111,3 +111,30 @@ class Student(object):
     @property
     def age(self):
         return 2015 - self._birth
+
+#多重继承
+class Animal(object):
+    def __init__(self) -> None:
+        super().__init__()
+
+#big class
+class Mammal(Animal):
+    def __init__(self) -> None:
+        super().__init__()
+
+class Bird(Animal):
+    def __init__(self) -> None:
+        super().__init__()
+
+# kinds of animal
+class Dog(Mammal):
+    pass
+
+class Bat(Mammal):
+    pass
+
+class Parrot(Bird):
+    pass
+
+class Ostrich(Bird):
+    pass
