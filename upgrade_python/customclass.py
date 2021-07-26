@@ -163,3 +163,57 @@ class Chain(object):
 
     __repr__ = __str__
 print(Chain().status.user.timeline.list)
+
+#__call__
+# 一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self):
+        print('My name is %s.' % self.name)
+ 
+s = Student('g')
+s()
+# 那么，怎么判断一个变量是对象还是函数呢？其实，更多的时候，我们需要判断一个对象是否能被调用，能被调用的对象就是一个Callable对象，比如函数和我们上面定义的带有__call__()的类实例：
+print(callable(Student))
+print(callable([1, 2, 3]))
+
+#============================================== #
+#                                                 enum class                                           #
+#============================================== #
+from enum import Enum
+Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+
+#print the value of Month.Jan
+print(Month['Jan'].value) 
+print(Month.Jan.value)
+
+# print all of the value
+for name, member in Month.__members__.items():
+        print(name, '=>', member, ',', member.value)
+# value属性则是自动赋给成员的int常量，默认从1开始计数。
+# 如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：
+from enum import Enum, unique
+@unique
+class Weekday(Enum):
+    Sun = 0 # Sun的value被设定为0
+    Mon = 1
+    Tue = 2
+    Wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
+print(Weekday.Tue.value)
+for name, member in Weekday.__members__.items():
+    print(name,'==>',member)
+
+#============================================== #
+#                                                 metaclass                                          
+#============================================== #
+# class is dynamicly created  by type function
+def fn(self,name='world'):
+    print("Hello,%s" %name)
+Hello = type('Hello',(object,),dict(hello=fn))
+h = Hello()
+h.hello()
