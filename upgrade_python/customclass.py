@@ -183,6 +183,7 @@ print(callable([1, 2, 3]))
 #                                                 enum class                                           #
 #============================================== #
 from enum import Enum
+from typing import List
 Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
 
 #print the value of Month.Jan
@@ -217,3 +218,51 @@ def fn(self,name='world'):
 Hello = type('Hello',(object,),dict(hello=fn))
 h = Hello()
 h.hello()
+# 先定义metaclass，然后创建类。
+# 所以，metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。
+# # metaclass是类的模板，所以必须从`type`类型派生：
+class ListMetaclass(type):
+    def __new__(cls, name, bases, attrs):
+        attrs['add'] = lambda self, value: self.append(value)
+        return type.__new__(cls, name, bases, attrs)
+class MyList(list, metaclass=ListMetaclass):
+    pass
+'''
+当我们传入关键字参数metaclass时，魔术就生效了，
+它指示Python解释器在创建MyList时，
+要通过ListMetaclass.__new__()来创建，
+在此，我们可以修改类的定义，比如，加上新的方法，
+然后，返回修改后的定义。
+'''
+
+# 动态连接属性
+#动态类
+# ORM
+'''
+ORM全称“Object Relational Mapping”，即对象-关系映射，
+就是把关系数据库的一行映射为一个对象，
+也就是一个类对应一个表，这样，写代码更简单，
+不用直接操作SQL语句。
+'''
+'''
+要编写一个ORM框架，所有的类都只能动态定义，
+因为只有使用者才能根据表的结构定义出对应的类来。
+'''
+'''
+让我们来尝试编写一个ORM框架。
+'''
+"""
+编写底层模块的第一步，就是先把调用接口写出来。
+比如，使用者如果使用这个ORM框架，
+想定义一个User类来操作对应的数据库表User，
+我们期待他写出这样的代码：
+"""
+
+#============================================== #
+#                                                 调试                                          
+#============================================== #
+# 1. use print 麻烦,代码不美观
+# 2. 断言 assert 和print一样，但是python -O可以关闭asset
+# 关闭后，你可以把所有的assert语句当成pass来看。
+
+
