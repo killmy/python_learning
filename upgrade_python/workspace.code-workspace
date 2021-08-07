@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../资料/pytorch-tutorial-master"
+		}
+	],
+	"settings": {}
+}
