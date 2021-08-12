@@ -4,7 +4,9 @@
 
 def function(*args):
     print(args)
+    print(args[0])
 function(1,2)
+function([1,2,3],4)
 def function1(**kwargs):
     for key,value in kwargs.items():
         print(key,value)
